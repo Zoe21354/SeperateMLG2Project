@@ -6,8 +6,8 @@
         3. training the model
 """
 import pandas as pd
-from sklearn.model_selection import train_test_split    # Splits the raw_data into two sets of data
-from sklearn.linear_model import LogisticRegression     # 
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_predict
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import warnings                                         # Ignores any future warnings
 warnings.filterwarnings('ignore')  
@@ -63,6 +63,27 @@ print(f"Accuracy Score for Predictions: {accuracy_score(y_test,test_predictions)
     - The model shows it can accurately predict 77% of the Loan_Status values correctly.
 """
 
-# ==============================================B. PREDICTIONS FOR MODEL 1 TEST DATA ============================================= #
-# Read prediction CSV Files
-predictions = pd.read_csv('Artifacts/Predictions.csv')
+# ============================================== C. CROSS VALIDATION FOR MODEL 1 ============================================= #
+""" 
+    # Stratified K-Fold Cross Validation: 
+        - This variation of k-fold cross-validation is used when the target variable is imbalanced. 
+        - It ensures that each fold is a good representative of the whole dataset. 
+        - It’s generally a better approach when dealing with both bias and variance.
+"""
+# Perform stratified k-fold cross-validation
+skf = StratifiedKFold(n_splits=5)
+cross_val_predictions = cross_val_predict(model1, X, y, cv=skf)
+
+
+# ============================================== D. PREDICTIONS FOR MODEL 1 ============================================= #
+# Save the predictions to a CSV file
+predictions_df = pd.DataFrame(test_predictions, columns=['Predictions'])
+with open('Predictions.csv', 'a') as f:
+    f.write("\nPredictions from initial model\n")
+    predictions_df.to_csv(f, header=True)
+
+# Save the cross-validation predictions to the same CSV file
+cross_val_predictions_df = pd.DataFrame(cross_val_predictions, columns=['Cross_Val_Predictions'])
+with open('Predictions.csv', 'a') as f:
+    f.write("\nPredictions from cross-validation\n")
+    cross_val_predictions_df.to_csv(f, header=True)
