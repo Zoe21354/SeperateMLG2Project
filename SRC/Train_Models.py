@@ -126,7 +126,8 @@ print(f"\nMean validation accuracy score: {mean_score}")
     
 # Insight Gained:
     - The difference between the two accuracy scores can be attributed to the fact that cross-validation provides a more robust measure of the model’s performance.
-    - In cross-validation, the model is trained and tested on different subsets of the data, which helps to ensure that the model’s performance is not overly dependent on the specific way the data was split into training and test sets.
+    - In cross-validation, the model is trained and tested on different subsets of the data, which helps to ensure that the model’s performance is not overly 
+        dependent on the specific way the data was split into training and test sets.
     - The higher mean validation accuracy score suggests that the model’s performance may be slightly better than what was observed on the initial test set.
 """
 
