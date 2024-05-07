@@ -63,6 +63,11 @@ print(f"Accuracy Score for Predictions: {accuracy_score(y_test,test_predictions)
     - The model shows it can accurately predict 77% of the Loan_Status values correctly.
 """
 
+# Save the predictions to a CSV file
+predictions_df = pd.DataFrame(test_predictions, columns=['Predictions'])
+predictions_df.to_csv('Predictions.csv', mode='a', header=False)
+
+
 # ============================================== C. CROSS VALIDATION FOR MODEL 1 ============================================= #
 """ 
     # Stratified K-Fold Cross Validation: 
@@ -74,16 +79,21 @@ print(f"Accuracy Score for Predictions: {accuracy_score(y_test,test_predictions)
 skf = StratifiedKFold(n_splits=5)
 cross_val_predictions = cross_val_predict(model1, X, y, cv=skf)
 
+# Perform Stratified K-Fold Cross Validation
+kf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True)
+i = 1
+for train_index, test_index in kf.split(X, y):
+    print('\n{} of kfold {}'.format(i, kf.n_splits))
+    xtr, xvl = X.iloc[train_index], X.iloc[test_index]
+    ytr, yvl = y.iloc[train_index], y.iloc[test_index]
+    model = LogisticRegression(random_state=1)
+    model.fit(xtr, ytr)
+    pred_test = model.predict(xvl)
+    score = accuracy_score(yvl, pred_test)
+    print('accuracy_score', score)
+    i += 1
 
-# ============================================== D. PREDICTIONS FOR MODEL 1 ============================================= #
-# Save the predictions to a CSV file
-predictions_df = pd.DataFrame(test_predictions, columns=['Predictions'])
-with open('Predictions.csv', 'a') as f:
-    f.write("\nPredictions from initial model\n")
-    predictions_df.to_csv(f, header=True)
 
 # Save the cross-validation predictions to the same CSV file
-cross_val_predictions_df = pd.DataFrame(cross_val_predictions, columns=['Cross_Val_Predictions'])
-with open('Predictions.csv', 'a') as f:
-    f.write("\nPredictions from cross-validation\n")
-    cross_val_predictions_df.to_csv(f, header=True)
+cross_val_predictions_df = pd.DataFrame(pred_test, columns=['Cross Validation Predictions'])
+cross_val_predictions_df.to_csv('Predictions.csv', mode='a', header=False)
