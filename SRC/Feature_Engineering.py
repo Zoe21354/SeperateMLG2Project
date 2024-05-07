@@ -11,7 +11,7 @@ train_data= pd.read_csv('Data/Split Data/train_data.csv')
 test_data=pd.read_csv('Data/Split Data/test_data.csv')
 
 
-# ================================================== FEATURE ENGINEERING ================================================== #
+# =============================================== FEATURE ENGINEERING MODEL 1 =============================================== #
 """     
     # Feature engineering transforms or combines raw data into a format that can be easily understood by machine learning models.
     # Creates predictive model features, also known as a dimensions or variables, to generate model predictions.
@@ -93,5 +93,8 @@ Testing Data  Columns:Index(['Dependents', 'Credit_History', 'Loan_Amount_Log', 
 """
 
 # Store new Features in CSV files
-train_data.to_csv('Artifacts/Feature_Importance_train_data_NF.csv', index=False)
-test_data.to_csv('Artifacts/Feature_Importance_test_data_NF.csv', index=False)
+train_data.to_csv('Artifacts/Feature_Importance_train_data_NF_Model1.csv', index=False)
+test_data.to_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv', index=False)
+
+
+# =============================================== FEATURE ENGINEERING MODEL 2 =============================================== #
