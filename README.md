@@ -25,9 +25,10 @@ Hypothesis: An applicant's marital status may have an impact on loan approval ra
 Justification: Bi-variate analysis displays differences in loan approval rates for married individuals compared to unmarried individuals.
 
 Hypothesis 4
-Hypothesis: The type of property—rural, semi-urban, or urban—may affect the likelihood of a loan being approved.
+Hypothesis: The type of property —rural, semi-urban, or urban— may affect the likelihood of a loan being approved.
+Hypothesis: Individuals located in the semi-urban areas are more likelihood to get their loan request approved.
 Justification: variable property areas have variable loan approval rates, as shown by univariate analysis. As an illustration, the percentage of loans that are authorized is higher in semi-urban areas than in urban and rural areas.
 
-Hypothesis 5
+Hypothesis 6
 Hypothesis: There is a positive correlation between income levels and loan acceptance rates.
 Justification: According to univariate research, applicants with higher earnings typically receive a higher percentage of loan approvals. This implies that judgments about loan approval may be significantly influenced by an individual's income level.
