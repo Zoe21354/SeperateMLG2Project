@@ -93,5 +93,5 @@ Testing Data  Columns:Index(['Dependents', 'Credit_History', 'Loan_Amount_Log', 
 """
 
 # Store new Features in CSV files
-train_data.to_csv('Data/Split Data/train_data_NF.csv', index=False)
-test_data.to_csv('Data/Split Data/test_data_NF.csv', index=False)
+train_data.to_csv('Artifacts/Feature_Importance_train_data_NF.csv', index=False)
+test_data.to_csv('Artifacts/Feature_Importance_test_data_NF.csv', index=False)
