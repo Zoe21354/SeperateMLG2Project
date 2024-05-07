@@ -59,3 +59,39 @@ plt.show()
     # The feature "Balanced Income" is created by dividing the ‘LoanAmount’ by the ‘Loan_Amount_Term’. 
     # This is to get the monthly payment amount for a loan, given the total loan amount and the term of the loan. 
     # This will give an indication of the individuals monthly financial obligation towards the loan.
+    # 'EMI' is multiplied with 1000 to make the unit equal to 'Total_Income'.
+
+train_data['Income_After_EMI']=train_data['Total_Income']-(train_data['EMI']*1000)
+test_data['Income_After_EMI']=test_data['Total_Income']-(test_data['EMI']*1000)
+
+sns.distplot(train_data['Income_After_EMI'])
+plt.title('Distribution of Income After EMI')
+plt.xlabel('Income After EMI')
+plt.ylabel('Density')
+plt.show()
+
+# Remove all features that created the new features
+    # The correlation between those old feature and the new features are very high.
+    # Logistic regression assume that the variables are not highly correlated.
+    # Due to this the excess noise in the datasets are removed.
+
+train_data=train_data.drop(['Applicant_Income','Coapplicant_Income','Loan_Amount','Loan_Amount_Term'],axis=1)
+test_data=test_data.drop(['Applicant_Income','Coapplicant_Income','Loan_Amount','Loan_Amount_Term'],axis=1)
+
+print(f"Training Data Columns: {train_data.columns}\n")
+print(f"Testing Data Columns:{test_data.columns}\n")
+
+"""
+Training Data Columns: 
+    Index(['Dependents', 'Credit_History', 'Loan_Amount_Log', 'Gender_Female','Gender_Male', 'Married_No', 'Married_Yes', 'Education_Graduate',
+    'Education_Not Graduate', 'Self_Employed_No', 'Self_Employed_Yes','Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban',
+    'Loan_Status', 'Total_Income', 'Total_Income_Log', 'EMI','Income_After_EMI'],dtype='object')
+
+Testing Data  Columns:Index(['Dependents', 'Credit_History', 'Loan_Amount_Log', 'Gender_Female','Gender_Male', 'Married_No', 
+    'Married_Yes', 'Education_Graduate','Education_Not Graduate', 'Self_Employed_No', 'Self_Employed_Yes','Property_Area_Rural', 
+    'Property_Area_Semiurban', 'Property_Area_Urban','Loan_Status', 'Total_Income', 'Total_Income_Log', 'EMI', 'Income_After_EMI'], dtype='object')
+"""
+
+# Store new Features in CSV files
+train_data.to_csv('Data/Split Data/train_data_NF.csv', index=False)
+test_data.to_csv('Data/Split Data/test_data_NF.csv', index=False)

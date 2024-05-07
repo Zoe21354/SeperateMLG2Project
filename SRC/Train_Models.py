@@ -74,7 +74,7 @@ predictions_df.index.names = ['Index']
 predictions_df.to_csv('Artifacts/Log_Reg_Mod1_Predictions.csv', mode='a', header=True)
 
 
-# ============================================== C. CROSS VALIDATION FOR MODEL 1 ============================================= #
+#Cross validation model 1
 """ 
     # Stratified K-Fold Cross Validation: 
         - This variation of k-fold cross-validation is used when the target variable is imbalanced. 
@@ -97,7 +97,7 @@ for train_index, test_index in kf.split(X, y):
     pred_test = model.predict(xvl)
     score = accuracy_score(yvl, pred_test)
     scores.append(score)
-    print('accuracy_score', score)
+    print('accuracy_score:', score)
     i += 1
 
 # Calculate the mean validation accuracy score
@@ -108,19 +108,19 @@ print(f"\nMean validation accuracy score: {mean_score}")
 """
 # Answers:
     1 of kfold 5
-    accuracy_score 0.7723577235772358
+    accuracy_score: 0.7723577235772358
 
     2 of kfold 5
-    accuracy_score 0.7967479674796748
+    accuracy_score: 0.7967479674796748
 
     3 of kfold 5
-    accuracy_score 0.7642276422764228
+    accuracy_score: 0.7642276422764228
 
     4 of kfold 5
-    accuracy_score 0.8048780487804879
+    accuracy_score: 0.8048780487804879
 
     5 of kfold 5
-    accuracy_score 0.7786885245901639
+    accuracy_score: 0.7786885245901639
 
     Mean validation accuracy score: 0.7833799813407971
     
@@ -140,3 +140,47 @@ cross_val_predictions_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictio
 # Save the mean validation accuracy score to the same CSV file
 mean_score_df = pd.DataFrame([mean_score], columns=['Mean Validation Accuracy Score'])
 mean_score_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mode='a', header=False)
+
+
+
+# ================================================== B. TRAIN MODEL 2 ================================================== #
+# Read CSV Files
+train_data_NF = pd.read_csv('Data/Split Data/train_data_NF.csv')
+test_data_NF = pd.read_csv('Data/Split Data/test_data_NF.csv')
+
+# Define the independent variables (features) and the target variable
+X = train_data_NF.drop('Loan_Status', axis=1)
+y = train_data_NF['Loan_Status']
+
+#To make column equal between train_data_NF(X) dataset and test_data_NF dataset
+test_data_NF['Income_After_EMI'] = X['Income_After_EMI'].copy()
+
+# Create a Logistic Regression model
+kf=StratifiedKFold(n_splits=5,random_state=1,shuffle=True) 
+i=1 
+scores = [] 
+for train_index,test_index in kf.split(X,y):
+    print('\n{} of kfold {}'.format(i,kf.n_splits))
+    xtr,xvl=X.loc[train_index],X.loc[test_index] 
+    ytr,yvl=y[train_index],y[test_index]
+    
+    model=LogisticRegression(random_state=1)
+    model.fit(xtr,ytr)
+    pred_test=model.predict(xvl)
+    score=accuracy_score(yvl,pred_test)
+    print('accuracy_score: ',score)
+    i+=1
+    pred_test=model.predict(test_data_NF)
+    pred=model.predict_proba(xvl)[:,1]
+
+# Calculate the mean validation accuracy score
+mean_score = np.mean(scores)
+print(f"\nMean validation accuracy score: {mean_score}")
+
+"""
+# Answers:
+
+
+# Insight Gained:
+    - 
+"""
