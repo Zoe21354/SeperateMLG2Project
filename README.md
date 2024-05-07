@@ -11,24 +11,18 @@ The aim of this project is to use machine learning to transform BC Finance's loa
 
 The prepare_data.py file is essential in this situation as it organizes several data pretreatment and exploratory analysis activities. By carefully going over the dataset, which includes factors like gender, marital status, income levels, credit history, and property location, this script reveals important information that serves as the foundation for the phases of model construction and hypothesis formulation that follow.
 
-Hypothesis 1
-Hypothesis: The likelihood of loan approval is positively impacted by having a good credit history. 
+Hypothesis 1: The likelihood of loan approval is positively impacted by having a good credit history. 
 Justification: Bi-variate analysis shows a moderately positive correlation between Credit_History and Loan_Status, indicating
 that applicants with a good credit history are more likely to have their loans approved. 
 
-Hypothesis 2
-Hypothesis: Loan amounts in the low to average range are more likely to be approved than high loan amounts. 
+Hypothesis 2: Loan amounts in the low to average range are more likely to be approved than high loan amounts. 
 Justification: Bi-variate analysis shows that the proportion of approved loans is higher for low and average loan amounts, indicating a greater likelihood of approval for smaller loan amounts. 
 
-Hypothesis 3
-Hypothesis: An applicant's marital status may have an impact on loan approval rates. 
+Hypothesis 3: An applicant's marital status may have an impact on loan approval rates. 
 Justification: Bi-variate analysis displays differences in loan approval rates for married individuals compared to unmarried individuals.
 
-Hypothesis 4
-Hypothesis: The type of property —rural, semi-urban, or urban— may affect the likelihood of a loan being approved.
-Hypothesis: Individuals located in the semi-urban areas are more likelihood to get their loan request approved.
+Hypothesis 4: The type of property—rural, semi-urban, or urban—may affect the likelihood of a loan being approved.
 Justification: variable property areas have variable loan approval rates, as shown by univariate analysis. As an illustration, the percentage of loans that are authorized is higher in semi-urban areas than in urban and rural areas.
 
-Hypothesis 6
-Hypothesis: There is a positive correlation between income levels and loan acceptance rates.
-Justification: According to univariate research, applicants with higher earnings typically receive a higher percentage of loan approvals. This implies that judgments about loan approval may be significantly influenced by an individual's income level.
+Hypothesis 5: There is a positive correlation between income levels and loan acceptance rates.
+Justification: According to univariate research, applicants with higher earnings typically receive a higher percentage of loan approvals. This implies that judgments about loan approval may be significantly influenced by an individual's income level. 
