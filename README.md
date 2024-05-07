@@ -1,11 +1,4 @@
-ReadMe.md: This file provides:
-    1. An overview of the project, 
-    2. The problem statement, 
-    3. The approach taken,
-    4. The file structure
-    5. Instructions on how to run the code.
-
-# Machine Learning 381 - GroupF - Streamlining BC Finance’s Home Loan Eligibility Process
+# Machine Learning 382 - GroupF - Streamlining BC Finance’s Home Loan Eligibility Process
 
 BC Finance Company provides financial services across all home loan categories. Offering services to clients in urban, semi-urban, and rural areas, the organization has many facets. The organization currently uses an ineffective manual procedure to validate customers' eligibility. The procedure entails the client submitting an application for a home loan by answering questions and supplying personal information. These responses must then go through a lengthy validation process and this can be a problem for handling multiple applications leading to decreased customer satisfaction, manual errors and lengthy application times which could lead to customers seeking other financial institutes to provide financial services for their needs.
 

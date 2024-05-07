@@ -5,7 +5,6 @@
         -> Univariate Analysis
         -> Bi-variate Analysis
 
-    B. Data Splitting: Training and Testing data
 """
 # Import Libraries
 import csv                                              # Read and Write to CSV files
@@ -24,7 +23,6 @@ raw_data_copy = raw_data.copy()
 
 validation_data = pd.read_csv('Data/Original Data/validation.csv')
 validation_data_copy = validation_data.copy()
-
 
 # ======================================================= A. DATA ANALYSIS PROCESSES ======================================================= #
 
@@ -309,6 +307,7 @@ plt.show()
     # The graphs created below will display how the Dependent Attribute ‘Loan_Status’ is distributed within each Independent Attribute, regardless of how many observations there are.
 """
 # Categorical Independent Variables and Dependent Variable LoanAmount
+# Loan_Status vs Gender
 gender_table = pd.crosstab(raw_data_copy['Gender'], raw_data_copy['Loan_Status'])
 gender_table.div(gender_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Gender Category')
@@ -318,10 +317,11 @@ plt.show()
 
 """
 # Insight Gained:
-    - 
-    - 
+    - The proportion of ‘Y’ loan status is slightly higher for males, indicating a marginally higher approval rate compared to females.
+    - For both genders, the majority of the loan status is ‘Y’, suggesting that most applicants in the dataset were approved for a loan.
 """
 
+# Loan_Status vs Married
 married_table = pd.crosstab(raw_data_copy['Married'], raw_data_copy['Loan_Status'])
 married_table.div(married_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Marriage Category')
@@ -331,10 +331,11 @@ plt.show()
 
 """
 # Insight Gained:
-    - 
-    - 
+    - The ‘Yes’ category shows a higher proportion for the loan status ‘Yes’, suggesting that married individuals may have a better chance of loan approval.
+    - Conversely, the ‘No’ category has a higher proportion for the loan status ‘No’, indicating that unmarried individuals may face more rejections.
 """
 
+# Loan_Status vs Self_Employed
 self_employed_table = pd.crosstab(raw_data_copy['Self_Employed'], raw_data_copy['Loan_Status'])
 self_employed_table.div(self_employed_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Self Employment Category')
@@ -344,10 +345,11 @@ plt.show()
 
 """
 # Insight Gained:
-    - 
-    - 
+    - The ‘Yes’ loan status is present in both self-employment categories, but there is a slightly larger proportion of approvals for individuals who are not self-employed (‘No’) compared to those who are self-employed (‘Yes’).
+    - Self-Employment Impact: The graph suggests that being self-employed might have a slight impact on loan approval rates, although the difference is not substantial.
 """
 
+# Loan_Status vs Credit_History
 credit_history_table = pd.crosstab(raw_data_copy['Credit_History'], raw_data_copy['Loan_Status'])
 credit_history_table.div(credit_history_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Credit History Category')
@@ -358,12 +360,14 @@ plt.show()
 """
 # Insight Gained:
     - 
-    - 
+    - Individuals in Credit History Category ‘1’ have a higher proportion of getting approval for a loan, indicating a positive correlation between a good credit history and loan approval.
+    - Category ‘0’ has a higher proportion of being rejected for a loan approval, suggesting that a poor credit history is associated with higher loan rejections.
 """
 
 
 
 # Ordinal Independent Variables and Dependent Variable LoanAmount
+# Loan_Status vs Dependents
 dependents_table = pd.crosstab(raw_data_copy['Dependents'], raw_data_copy['Loan_Status'])
 dependents_table.div(dependents_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Dependent Category')
@@ -373,10 +377,11 @@ plt.show()
 
 """
 # Insight Gained:
-    - 
-    - 
+    - The ‘Yes’ loan status is present across all dependent categories, but there is a trend where the proportion of approvals decreases as the number of dependents increases.
+    - The graph suggests that having more dependents might negatively impact the rate of loan approval.
 """
 
+# Loan_Status vs Education
 education_table = pd.crosstab(raw_data_copy['Education'], raw_data_copy['Loan_Status'])
 education_table.div(education_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Education Category')
@@ -386,10 +391,10 @@ plt.show()
 
 """
 # Insight Gained:
-    - 
-    - 
+    - A larger proportion of graduates have their loans approved (‘Y’) compared to non-graduates who have a higher proportion of being rejected (‘N’).
 """
 
+# Loan_Status vs Property Area
 property_area_table = pd.crosstab(raw_data_copy['Property_Area'], raw_data_copy['Loan_Status'])
 property_area_table.div(property_area_table.sum(1).astype(float),axis=0).plot(kind='bar', stacked=True)
 plt.title('Loan Status by Property Area Category')
@@ -400,7 +405,9 @@ plt.show()
 """
 # Insight Gained:
     - 
-    - 
+    - The Semiurban areas have the highest proportion of approved loans (‘Y’), suggesting a favorable outcome for loan applicants in these areas.
+    - The Rural area has the lowest proportion of approved loans, indicating potential challenges or stricter criteria for loan approval.
+    - Urban Observations: The Urban area has a moderate proportion of approved loans, falling between the Rural and Semiurban areas.
 """
 
 # Numerical Independent Variables and Dependent Variable LoanAmount
@@ -409,25 +416,21 @@ plt.show()
         relate to the likelihood of a loan being approved.
 """
 
-    # In order to determine the impact of the income on the Loan_Status, the mean income is calculated to determine who's loans were approved vs who's were not.
+# In order to determine the impact of the income on the Loan_Status, the mean income is calculated to determine who's loans were approved vs who's were not.
+# Loan_Status vs Applicant_Income
 raw_data_copy.groupby('Loan_Status')['ApplicantIncome'].mean().plot.bar()
 plt.title('Average Applicant Income by Loan Status')
 plt.xlabel('Loan Status')
 plt.ylabel('Average Applicant Income')
 plt.show()
 
-"""
-# Insight Gained:
-    - 
-    - 
-"""
 
+# ApplicantIncome is categorized in loans within each income bracket.
+# This will access whether different income levels, when the applicant income and the co-applicant income are added together, will influence the Loan approval rate.
+# Binning will transform the continuous numerical variables into discrete categorical ‘bins’. 
+# Income brackets such as "Low", "Average", "Above Average", and "High" are used to provide a qualitative understanding of the ranges in the data.
 
-    # ApplicantIncome is categorized in loans within each income bracket.
-    # This will access whether different income levels, when the applicant income and the co-applicant income are added together, will influence the Loan approval rate.
-    # Binning will transform the continuous numerical variables into discrete categorical ‘bins’. 
-    # Income brackets such as "Low", "Average", "Above Average", and "High" are used to provide a qualitative understanding of the ranges in the data.
-
+# Loan_Status vs Total Income
 # Combine the applicant income and co-applicant income together
 raw_data_copy['Total_Income']=raw_data_copy['ApplicantIncome']+raw_data_copy['CoapplicantIncome']
 
@@ -457,10 +460,11 @@ plt.show()
     - This analysis indicates that higher income levels are associated with better chances of loan approval, highlighting the importance of income in the loan decision process.
 """
 
-    # Loan amount is categorized in loans within each loan bracket.
-    # This will access whether different loan amounts will influence the Loan approval rate.
-    # Loan brackets such as "Low", "Average", and "High" are used to provide a qualitative understanding of the ranges in the data.
+# Loan amount is categorized in loans within each loan bracket.
+# This will access whether different loan amounts will influence the Loan approval rate.
+# Loan brackets such as "Low", "Average", and "High" are used to provide a qualitative understanding of the ranges in the data.
 
+# Loan_Status vs Loan Amount
 # Calculate the bin values
 low = raw_data_copy['LoanAmount'].quantile(0.333) # 33.3th percentile
 average = raw_data_copy['LoanAmount'].quantile(0.666) # 66.6th percentile
@@ -512,37 +516,3 @@ plt.show()
     - Overall, the heatmap suggests that both income and credit history play significant roles in loan amount determination and approval. 
         The weaker correlation for CoapplicantIncome may indicate that lenders prioritize the primary applicant’s financial status.
 """
-
-
-
-# ================================================== B. SPLITTING THE RAW DATA INFORMATION ================================================== #
-"""     
-    # Dummy data is used to convert the categorical data into 0's and 1's  to make it easy to be quantified and compared in the future models
-        -> Example: Gender has Male and Female categories
-        -> Using 'dummies' from pandas, it converts them into Gender_Male = 1 and Gender_Female = 0
-    # Training data set has weight 80% 0r 0.8
-    # Testing data set has weight 20% or 0.2
-    # 'random_state=42' is used for reproducibility, meaning if the code is run multiple times the same train/test split will occur every time.
-"""
-
-# Read Cleaned CSV Files
-cleaned_raw_data = pd.read_csv('Data/Cleaned Data/cleaned_raw_data.csv')
-cleaned_raw_data_copy = cleaned_raw_data.copy()
-
-# Define the independent variables (features) and the target variable
-X = cleaned_raw_data_copy.drop('Loan_Status', axis=1)  # all columns except 'Loan_Status'
-y = cleaned_raw_data_copy['Loan_Status']  # only 'Loan_Status' column
-
-# Convert categorical variable in the X dataset(all columns except 'Loan_Status') into dummy variables
-X = pd.get_dummies(X)
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Create new DataFrames for training and testing sets
-train_data = pd.concat([X_train, y_train], axis=1)
-test_data = pd.concat([X_test, y_test], axis=1)
-
-# Save the training and testing sets to CSV files
-train_data.to_csv('Data/Split Data/train_data.csv', index=False)
-test_data.to_csv('Data/Split Data/test_data.csv', index=False)
