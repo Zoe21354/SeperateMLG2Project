@@ -1,19 +1,10 @@
-ReadMe.md: This file provides:
-    1. An overview of the project, 
-    2. The problem statement, 
-    3. The approach taken,
-    4. The file structure
-    5. Instructions on how to run the code.
+# Machine Learning 382 - GroupF - Streamlining BC Finance’s Home Loan Eligibility Process
 
-# Machine Learning 381 - GroupF - Streamlining BC Finance’s Home Loan Eligibility Process
+BC Finance Company provides financial services across all home loan categories. Offering services to clients in urban, semi-urban, and rural areas, the organization has many facets. The organization currently uses an ineffective manual procedure to validate customers' eligibility. The procedure entails the client submitting an application for a home loan by answering questions and supplying personal information. These responses must then go through a lengthy validation process and this can be a problem for handling multiple applications leading to decreased customer satisfaction, manual errors and lengthy application times which could lead to customers seeking other financial institutes to provide financial services for their needs.
 
-**About Company:**
+The organization is working to create an automated system that can accurately determine a customer's eligibility for a home loan in real time in order to address this problem. To ascertain if a customer is eligible for a loan, this system will examine a number of customer variables, including gender, marital status, education, number of dependents, income, loan amount, credit history, and others.
 
-BC Finance company deals in all home loans. They have a presence across all urban, semi-urban and rural areas. The customer first applies for a home loan after that company validates the customer's eligibility for a loan.
+The principal aim is to divide clients into discrete categories according to their loan quantum eligibility. By doing this, BC Finance hopes to more successfully target these consumer segments and provide them with loan products and services that are customized to their unique requirements and preferences. BC Finance hopes to improve client happiness, reduce manual errors, and streamline its lending procedures for long-term profitability and growth by putting in place an automated loan qualifying system.
 
-**Problem:**
-
-The company wants to automate the loan eligibility process (real-time) based on customer detail provided while filling out the online application form. 
-
-These details are Gender, Marital Status, Education, Number of Dependents, Income, Loan Amount, Credit History, and others. To automate this process, they have given a problem identifying the customer segments eligible for 
-loan amounts to target these customers specifically. Here they have provided a partial data set.
+## **Hypothesis:**
+(Insert information on hypotheses generated based on the insight gained from the Prepare_Data.py code)
