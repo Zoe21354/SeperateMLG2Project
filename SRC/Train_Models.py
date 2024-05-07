@@ -7,6 +7,7 @@
 """
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_predict
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -143,7 +144,20 @@ mean_score_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mo
 
 
 
+# Save the trained model to a pickle file
+with open('Artifacts/Model_1.pkl', 'wb') as f:
+    pickle.dump(model1, f)
+
+#View data in the Model_1.pkl file
+with open('Artifacts/Model_1.pkl', 'rb') as f:
+    data = pickle.load(f)
+
+print(f"Model 1 pickle file data: {data}")
+
+""" Answer: Model 1 pickle file data: LogisticRegression() """
+
+
 # ================================================== B. TRAIN MODEL 2 ================================================== #
 # Read CSV Files
-train_data_NF = pd.read_csv('Data/Split Data/train_data_NF.csv')
-test_data_NF = pd.read_csv('Data/Split Data/test_data_NF.csv')
+train_data_NF = pd.read_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv')
+test_data_NF = pd.read_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv')
