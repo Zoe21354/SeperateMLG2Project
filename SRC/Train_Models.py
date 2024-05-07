@@ -48,8 +48,9 @@ test_data.to_csv('Data/Split Data/test_data.csv', index=False) """
 
 
 # ================================================== B. TRAIN MODEL 1 ================================================== #
-# Remove the data from the Predictions.csv file
-open('Artifacts/Predictions.csv', 'w').close()
+# Remove the data from the Logistic Regression modelPredictions.csv file
+open('Artifacts/Log_Reg_Mod1_Predictions.csv', 'w').close()
+open('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', 'w').close()
 
 # Create a Logistic Regression model and Fit the model with the training data
 model1 = LogisticRegression()
@@ -68,11 +69,9 @@ print(f"Accuracy Score for Predictions: {accuracy_score(y_test,test_predictions)
 """
 
 # Save the predictions to a CSV file
-separator_df = pd.DataFrame(['---------- Logistic Regression model 1 Predictions Start ----------'], columns=['Separator'])
-separator_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
-
 predictions_df = pd.DataFrame(test_predictions, columns=['Predictions'])
-predictions_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
+predictions_df.index.names = ['Index']
+predictions_df.to_csv('Artifacts/Log_Reg_Mod1_Predictions.csv', mode='a', header=True)
 
 
 # ============================================== C. CROSS VALIDATION FOR MODEL 1 ============================================= #
@@ -82,14 +81,13 @@ predictions_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
         - It ensures that each fold is a good representative of the whole dataset. 
         - It’s generally a better approach when dealing with both bias and variance.
 """
-# Perform stratified k-fold cross-validation
+# Perform Stratified K-Fold Cross Validation
 skf = StratifiedKFold(n_splits=5)
 cross_val_predictions = cross_val_predict(model1, X, y, cv=skf)
 
-# Perform Stratified K-Fold Cross Validation
 kf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True)
 i = 1
-scores = []  # Initialize an empty list to store the accuracy scores
+scores = [] 
 for train_index, test_index in kf.split(X, y):
     print('\n{} of kfold {}'.format(i, kf.n_splits))
     xtr, xvl = X.iloc[train_index], X.iloc[test_index]
@@ -98,7 +96,7 @@ for train_index, test_index in kf.split(X, y):
     model.fit(xtr, ytr)
     pred_test = model.predict(xvl)
     score = accuracy_score(yvl, pred_test)
-    scores.append(score)  # Append the score to the list
+    scores.append(score)
     print('accuracy_score', score)
     i += 1
 
@@ -132,16 +130,12 @@ print(f"\nMean validation accuracy score: {mean_score}")
     - The higher mean validation accuracy score suggests that the model’s performance may be slightly better than what was observed on the initial test set.
 """
 
-# Save the cross-validation predictions to the same CSV file
-separator_df = pd.DataFrame(['\n---------- Logistic Regression model 1 Predictions End ---------- \n---------- Cross Validation Predictions Start ----------\n'], columns=['Separator'])
-separator_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
+# Save the cross-validation predictions to CSV file
 cross_val_predictions_df = pd.DataFrame(pred_test, columns=['Cross Validation Predictions'])
-cross_val_predictions_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
+cross_val_predictions_df.index.names = ['Index']
+cross_val_predictions_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mode='a', header=True)
 
-# Add a separator line or a heading
-separator_df = pd.DataFrame(['\n---------- Cross Validation Predictions End ---------- \n---------- Mean Validation Accuracy Score Start ----------\n'], columns=['Separator'])
-separator_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
 
 # Save the mean validation accuracy score to the same CSV file
 mean_score_df = pd.DataFrame([mean_score], columns=['Mean Validation Accuracy Score'])
-mean_score_df.to_csv('Artifacts/Predictions.csv', mode='a', header=False)
+mean_score_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mode='a', header=False)
