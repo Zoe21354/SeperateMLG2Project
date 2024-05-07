@@ -1,0 +1,3 @@
+// model_1.pkl and model_2.pkl: These files contain the trained models saved in pickle format.
+// Loading the trained models for prediction.
+// Evaluating the models’ performance.
