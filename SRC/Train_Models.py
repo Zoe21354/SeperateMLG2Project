@@ -148,10 +148,11 @@ mean_score_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mo
 with open('Artifacts/Model_1.pkl', 'wb') as f:
     pickle.dump(model1, f)
 
-#View data in the Model_1.pkl file
-with open('Artifacts/Model_1.pkl', 'rb') as f:
-    data = pickle.load(f)
 
-print(f"Model 1 pickle file data: {data}")
+# Create dummy feature importance values
+feature_importance_train = pd.DataFrame({'Feature': X_train.columns, 'Importance': np.random.rand(X_train.shape[1])})
+feature_importance_test = pd.DataFrame({'Feature': X_test.columns, 'Importance': np.random.rand(X_test.shape[1])})
 
-""" Answer: Model 1 pickle file data: LogisticRegression() """
+# Save feature importance values to CSV files
+feature_importance_train.to_csv('Artifacts/feature_importance_train_model1.csv', index=False)
+feature_importance_test.to_csv('Artifacts/feature_importance_test_model1.csv', index=False)
