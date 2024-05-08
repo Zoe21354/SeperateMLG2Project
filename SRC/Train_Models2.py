@@ -46,8 +46,16 @@ model2.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'
 model2.fit(X_train, y_train, epochs=100, batch_size=32, validation_data=(X_test, y_test))
 
 # Evaluate the model on the testing data
-loss, accuracy = model2.evaluate(X_test, y_test)
-print(f'Test Loss: {loss}, Test Accuracy: {accuracy}')
+test_predictions_model2 = model2.predict(X_test)
+test_predictions_model2_classes = np.round(test_predictions_model2).astype(int)
+accuracy_model2 = accuracy_score(y_test, test_predictions_model2_classes)
+print(f"Accuracy Score for Predictions (Model 2): {accuracy_model2}")
+
+
+# Save the predictions to a CSV file for Model 2
+predictions_df_model2 = pd.DataFrame(test_predictions_model2, columns=['Predictions'])
+predictions_df_model2.index.names = ['Index']
+predictions_df_model2.to_csv('Artifacts/NN_Model2_Predictions.csv', mode='a', header=True)
 
 # Save Model 2 as a pickle file
 with open('Artifacts/model2.pkl', 'wb') as f:
@@ -58,5 +66,5 @@ feature_importance_train = pd.DataFrame({'Feature': X_train.columns, 'Importance
 feature_importance_test = pd.DataFrame({'Feature': X_test.columns, 'Importance': np.random.rand(X_test.shape[1])})
 
 # Save feature importance values to CSV files
-feature_importance_train.to_csv('Artifacts/feature_importance_train.csv', index=False)
-feature_importance_test.to_csv('Artifacts/feature_importance_test.csv', index=False)
+feature_importance_train.to_csv('Artifacts/feature_importance_train_model2.csv', index=False)
+feature_importance_test.to_csv('Artifacts/feature_importance_test_model2.csv', index=False)
