@@ -58,7 +58,7 @@ predictions_df_model2.index.names = ['Index']
 predictions_df_model2.to_csv('Artifacts/NN_Model2_Predictions.csv', mode='a', header=True)
 
 # Save Model 2 as a pickle file
-with open('Artifacts/model2.pkl', 'wb') as f:
+with open('Artifacts/Model_2.pkl', 'wb') as f:
     pickle.dump(model2, f)
 
 # Create dummy feature importance values
