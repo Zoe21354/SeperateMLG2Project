@@ -194,7 +194,7 @@ Number of duplicate rows in validation_data_copy: 0
 
     # There are no duplicate records in either of the dataset, as a result no records need to be dropped 
         #raw_data_copy = raw_data_copy.drop_duplicates()
-        #validation_data_copy = validation_data_copy.drop_duplicates() 
+        #validation_data_copy = validation_data_copy.drop_duplicates()
 
 
 # 4. For both dataset, perform outliers Data Handling using log transformation
@@ -233,7 +233,7 @@ raw_data_copy['Dependents'] = raw_data_copy['Dependents'].astype('object')
 print(f"Dependents datatype:\n{raw_data_copy['Dependents'].dtypes}\n")
 """Answer: Dependents datatype: object"""
 
-#The Loan_Status values 'Yes and No' are replaced by '1 and 0' as logistic regression models only tak numerical values.
+#The Loan_Status values 'Yes and No' are replaced by '1 and 0' as logistic regression models only takes numerical values.
 raw_data_copy['Loan_Status'].replace('N',0,inplace=True)
 raw_data_copy['Loan_Status'].replace('Y',1,inplace=True)
 
