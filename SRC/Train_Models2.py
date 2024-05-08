@@ -9,6 +9,7 @@
 import pandas as pd
 import numpy as np
 import pickle
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_predict
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -22,7 +23,7 @@ warnings.filterwarnings('ignore')
 New_Features_test = pd.read_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv')
 New_Features_test_copy = New_Features_test.copy()
 
-New_Features_train = pd.read_csv('Artifacts/Feature_Importance_train_data_NF_Model.csv')
+New_Features_train = pd.read_csv('Artifacts/Feature_Importance_train_data_NF_Model1.csv')
 New_Features_train_copy = New_Features_train.copy()
 
 # Define the independent variables (features) and the target variable
@@ -284,4 +285,81 @@ feature_importance_test = pd.DataFrame({'Feature': X_test.columns, 'Importance':
 feature_importance_train.to_csv('Artifacts/feature_importance_train_model2.csv', index=False)
 feature_importance_test.to_csv('Artifacts/feature_importance_test_model2.csv', index=False)
 
+#Decision Tree
+#As the feature engineering had no improvement on the above model another algorithm can be used to cross validate the accuracy score.
+i=1
+scores = [] 
+kf=StratifiedKFold(n_splits=5,random_state=1,shuffle=True) 
+for train_index,test_index in kf.split(X,y):
+    print('\n{} of kfold {}'.format(i,kf.n_splits))
+    xtr,xvl=X.loc[train_index],X.loc[test_index] 
+    ytr,yvl=y[train_index],y[test_index]
+    
+    model=tree.DecisionTreeClassifier(random_state=1)
+    model.fit(xtr,ytr)
+    pred_test=model.predict(xvl)
+    score=accuracy_score(yvl,pred_test)
+    scores.append(score)
+    print('accuracy_score',score)
+    i+=1
 
+# Preprocess the test data in the same way as the training data
+New_Features_test_copy_processed = pd.get_dummies(New_Features_test_copy.drop('Loan_Status', axis=1))
+
+# Make sure the processed test data has the same columns as the training data
+New_Features_test_copy_processed = New_Features_test_copy_processed.reindex(columns = X.columns, fill_value=0)
+
+# Now you can make predictions on the processed test data
+pred_test=model.predict(New_Features_test_copy_processed)
+
+# Calculate the mean validation accuracy score
+mean_score = np.mean(scores)
+print(f"\nMean validation accuracy score: {mean_score}")
+
+"""
+#Answer: 
+1 of kfold 5
+accuracy_score 0.7474747474747475
+
+2 of kfold 5
+accuracy_score 0.6938775510204082
+
+3 of kfold 5
+accuracy_score 0.6836734693877551
+
+4 of kfold 5
+accuracy_score 0.7142857142857143
+
+5 of kfold 5
+accuracy_score 0.6836734693877551
+
+Mean validation accuracy score: 0.7045969903112761
+
+
+# Insight Gained:
+    - The accuracy of the model using the Decision Tree algorithm results in a 70.46% accuracy.
+"""
+
+# Assume `model` is your trained Decision Tree model
+importances = model.feature_importances_
+
+# Convert the importances into a pandas DataFrame
+feature_importances = pd.DataFrame({'Feature': X.columns, 'Importance': importances})
+
+# Sort the DataFrame by importance
+feature_importances = feature_importances.sort_values('Importance', ascending=False)
+
+# Plot the feature importances
+plt.figure(figsize=(10, 8))
+plt.barh(feature_importances['Feature'], feature_importances['Importance'], color='skyblue')
+plt.xlabel('Importance')
+plt.ylabel('Feature')
+plt.title('Feature Importance')
+plt.gca().invert_yaxis()  # Invert the y-axis to show the feature with the highest importance at the top
+plt.show()
+
+"""
+# Insight Gained:
+    - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential factor in the model’s predictions.
+    - 'Loan_AMount_Log' is the next important feature followed by the features ‘EMI’, ‘Income_After_EMI’,and  ‘Total_Income_Log’.
+"""
