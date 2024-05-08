@@ -155,9 +155,3 @@ with open('Artifacts/Model_1.pkl', 'rb') as f:
 print(f"Model 1 pickle file data: {data}")
 
 """ Answer: Model 1 pickle file data: LogisticRegression() """
-
-
-# ================================================== B. TRAIN MODEL 2 ================================================== #
-# Read CSV Files
-train_data_NF = pd.read_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv')
-test_data_NF = pd.read_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv')
