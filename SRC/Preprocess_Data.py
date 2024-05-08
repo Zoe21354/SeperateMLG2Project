@@ -236,7 +236,13 @@ print(f"Dependents datatype:\n{raw_data_copy['Dependents'].dtypes}\n")
 #The Loan_Status values 'Yes and No' are replaced by '1 and 0' as logistic regression models only takes numerical values.
 raw_data_copy['Loan_Status'].replace('N',0,inplace=True)
 raw_data_copy['Loan_Status'].replace('Y',1,inplace=True)
+print(f"Values in {raw_data_copy['Loan_Status'].value_counts()}\n")
 
+"""
+Values in Loan_Status
+1    422
+0    192
+Name: count, dtype: int64 """
 
 # 6. For both dataset, drop the Loan_ID column as it is does not affect the Dependent variable Loan_Status
 raw_data_copy.drop('Loan_ID',axis=1,inplace=True)
