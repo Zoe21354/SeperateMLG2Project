@@ -340,10 +340,8 @@ Mean validation accuracy score: 0.7045969903112761
     - The accuracy of the model using the Decision Tree algorithm results in a 70.46% accuracy.
 """
 
-# Assume `model` is your trained Decision Tree model
-importances = model.feature_importances_
-
 # Convert the importances into a pandas DataFrame
+importances = model.feature_importances_
 feature_importances = pd.DataFrame({'Feature': X.columns, 'Importance': importances})
 
 # Sort the DataFrame by importance
@@ -355,7 +353,7 @@ plt.barh(feature_importances['Feature'], feature_importances['Importance'], colo
 plt.xlabel('Importance')
 plt.ylabel('Feature')
 plt.title('Feature Importance')
-plt.gca().invert_yaxis()  # Invert the y-axis to show the feature with the highest importance at the top
+plt.gca().invert_yaxis()
 plt.show()
 
 """
