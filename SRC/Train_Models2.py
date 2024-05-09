@@ -17,6 +17,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import RandomForestClassifier
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -60,211 +62,211 @@ print(f"Accuracy Score for Predictions (Model 2): {accuracy_model2}")
 """
 #Answers: 
 Epoch 1/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 1s 44ms/step - accuracy: 0.3825 - loss: 288.2667 - val_accuracy: 0.6400 - val_loss: 93.3430
+13/13 ━━━━━━━━━━━━━━━━━━━━ 1s 12ms/step - accuracy: 0.5536 - loss: 32.2468 - val_accuracy: 0.3737 - val_loss: 7.0462
 Epoch 2/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6279 - loss: 83.7408 - val_accuracy: 0.6400 - val_loss: 125.3931
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4555 - loss: 12.8760 - val_accuracy: 0.6768 - val_loss: 4.4462
 Epoch 3/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6529 - loss: 84.8350 - val_accuracy: 0.6400 - val_loss: 50.6709
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5008 - loss: 9.1340 - val_accuracy: 0.6566 - val_loss: 3.5504
 Epoch 4/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5553 - loss: 25.8646 - val_accuracy: 0.4000 - val_loss: 20.4735
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5798 - loss: 2.3298 - val_accuracy: 0.3333 - val_loss: 7.5812
 Epoch 5/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4594 - loss: 16.1814 - val_accuracy: 0.6400 - val_loss: 32.4772
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - accuracy: 0.5844 - loss: 4.9612 - val_accuracy: 0.3333 - val_loss: 7.1200
 Epoch 6/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6861 - loss: 14.6053 - val_accuracy: 0.3200 - val_loss: 13.1153
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4884 - loss: 5.5620 - val_accuracy: 0.3333 - val_loss: 15.7749
 Epoch 7/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4437 - loss: 12.8190 - val_accuracy: 0.6800 - val_loss: 21.3057
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4529 - loss: 13.4157 - val_accuracy: 0.6667 - val_loss: 5.8231
 Epoch 8/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.4673 - loss: 14.0593 - val_accuracy: 0.6800 - val_loss: 16.9847
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5965 - loss: 4.1475 - val_accuracy: 0.6667 - val_loss: 1.7418
 Epoch 9/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6819 - loss: 9.3870 - val_accuracy: 0.3600 - val_loss: 24.6760
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5073 - loss: 9.1802 - val_accuracy: 0.6667 - val_loss: 6.8665
 Epoch 10/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.3241 - loss: 35.0079 - val_accuracy: 0.6400 - val_loss: 27.9458
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6469 - loss: 3.6637 - val_accuracy: 0.6667 - val_loss: 4.9820
 Epoch 11/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5916 - loss: 22.0611 - val_accuracy: 0.6800 - val_loss: 19.8524
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6079 - loss: 4.5217 - val_accuracy: 0.6667 - val_loss: 3.5170
 Epoch 12/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5552 - loss: 13.5718 - val_accuracy: 0.6000 - val_loss: 11.5013
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6141 - loss: 4.2797 - val_accuracy: 0.6667 - val_loss: 3.8716
 Epoch 13/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5961 - loss: 12.1485 - val_accuracy: 0.6800 - val_loss: 20.7940
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5154 - loss: 7.3474 - val_accuracy: 0.6667 - val_loss: 12.8569
 Epoch 14/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5241 - loss: 13.7204 - val_accuracy: 0.5600 - val_loss: 11.1837
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6222 - loss: 8.2622 - val_accuracy: 0.6667 - val_loss: 12.0313
 Epoch 15/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6840 - loss: 8.4772 - val_accuracy: 0.6800 - val_loss: 22.3395
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5806 - loss: 14.3814 - val_accuracy: 0.6667 - val_loss: 8.5901
 Epoch 16/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.5892 - loss: 11.9219 - val_accuracy: 0.3600 - val_loss: 24.9924
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5724 - loss: 7.1879 - val_accuracy: 0.6667 - val_loss: 1.6291
 Epoch 17/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 20ms/step - accuracy: 0.3442 - loss: 28.2977 - val_accuracy: 0.6800 - val_loss: 24.3118
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5047 - loss: 5.3516 - val_accuracy: 0.6667 - val_loss: 21.5175
 Epoch 18/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6364 - loss: 12.8042 - val_accuracy: 0.3200 - val_loss: 10.7558
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6435 - loss: 14.0309 - val_accuracy: 0.6667 - val_loss: 6.2848
 Epoch 19/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.5430 - loss: 9.0528 - val_accuracy: 0.6800 - val_loss: 21.5486
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5129 - loss: 3.6383 - val_accuracy: 0.6667 - val_loss: 1.2940
 Epoch 20/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6872 - loss: 12.2429 - val_accuracy: 0.3600 - val_loss: 11.5797
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5755 - loss: 1.8172 - val_accuracy: 0.6667 - val_loss: 10.3845
 Epoch 21/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3673 - loss: 12.2365 - val_accuracy: 0.6800 - val_loss: 19.5020
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6335 - loss: 15.1376 - val_accuracy: 0.6667 - val_loss: 28.7758
 Epoch 22/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5794 - loss: 9.5985 - val_accuracy: 0.6800 - val_loss: 12.9773
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6495 - loss: 23.9828 - val_accuracy: 0.6667 - val_loss: 10.9605
 Epoch 23/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.6893 - loss: 9.7151 - val_accuracy: 0.3600 - val_loss: 15.2136
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5996 - loss: 7.8212 - val_accuracy: 0.3434 - val_loss: 4.1262
 Epoch 24/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.3367 - loss: 22.6544 - val_accuracy: 0.6400 - val_loss: 28.8194
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5717 - loss: 4.3042 - val_accuracy: 0.6667 - val_loss: 8.1386
 Epoch 25/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6238 - loss: 21.4520 - val_accuracy: 0.6800 - val_loss: 17.6201
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6647 - loss: 9.5713 - val_accuracy: 0.6667 - val_loss: 11.2244
 Epoch 26/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4911 - loss: 12.4015 - val_accuracy: 0.5200 - val_loss: 9.6663
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6099 - loss: 7.1060 - val_accuracy: 0.3535 - val_loss: 2.5406
 Epoch 27/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6643 - loss: 6.8481 - val_accuracy: 0.4000 - val_loss: 8.9305
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4943 - loss: 8.9295 - val_accuracy: 0.6667 - val_loss: 3.4383
 Epoch 28/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3831 - loss: 12.8510 - val_accuracy: 0.6400 - val_loss: 34.2713
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5611 - loss: 3.1056 - val_accuracy: 0.6667 - val_loss: 2.5781
 Epoch 29/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6436 - loss: 27.0624 - val_accuracy: 0.6400 - val_loss: 40.6725
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6343 - loss: 4.6527 - val_accuracy: 0.3333 - val_loss: 3.5926
 Epoch 30/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6747 - loss: 21.8212 - val_accuracy: 0.3600 - val_loss: 24.1713
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5664 - loss: 7.6178 - val_accuracy: 0.3535 - val_loss: 10.9927
 Epoch 31/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3666 - loss: 29.1916 - val_accuracy: 0.6400 - val_loss: 24.7024
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4689 - loss: 10.3362 - val_accuracy: 0.6667 - val_loss: 6.3087
 Epoch 32/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6208 - loss: 14.0178 - val_accuracy: 0.3600 - val_loss: 8.7525
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5881 - loss: 4.5306 - val_accuracy: 0.6364 - val_loss: 1.5292
 Epoch 33/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.5164 - loss: 5.7991 - val_accuracy: 0.6800 - val_loss: 14.8070
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5984 - loss: 1.4457 - val_accuracy: 0.3434 - val_loss: 4.7104
 Epoch 34/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5768 - loss: 7.4518 - val_accuracy: 0.3600 - val_loss: 10.1482
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5684 - loss: 2.1958 - val_accuracy: 0.6162 - val_loss: 1.1487
 Epoch 35/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.4367 - loss: 9.8162 - val_accuracy: 0.3600 - val_loss: 8.5103
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6472 - loss: 2.0466 - val_accuracy: 0.3434 - val_loss: 3.7696
 Epoch 36/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3979 - loss: 11.6476 - val_accuracy: 0.6400 - val_loss: 26.2485
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5856 - loss: 2.1940 - val_accuracy: 0.6667 - val_loss: 2.6019
 Epoch 37/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6437 - loss: 16.7170 - val_accuracy: 0.4000 - val_loss: 7.6788
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6302 - loss: 3.5492 - val_accuracy: 0.3333 - val_loss: 9.6774
 Epoch 38/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3864 - loss: 8.9269 - val_accuracy: 0.6400 - val_loss: 25.8739
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4874 - loss: 6.6874 - val_accuracy: 0.3333 - val_loss: 15.6020
 Epoch 39/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6124 - loss: 18.2781 - val_accuracy: 0.6800 - val_loss: 17.0770
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4587 - loss: 17.0614 - val_accuracy: 0.3434 - val_loss: 17.8306
 Epoch 40/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5522 - loss: 10.4688 - val_accuracy: 0.6400 - val_loss: 43.6226
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.4603 - loss: 15.3318 - val_accuracy: 0.3535 - val_loss: 15.9988
 Epoch 41/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6560 - loss: 54.9425 - val_accuracy: 0.6400 - val_loss: 168.5073
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5032 - loss: 9.1057 - val_accuracy: 0.6364 - val_loss: 1.5817
 Epoch 42/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6685 - loss: 131.9707 - val_accuracy: 0.6400 - val_loss: 196.8980
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5768 - loss: 2.1335 - val_accuracy: 0.6364 - val_loss: 1.3883
 Epoch 43/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6779 - loss: 136.5417 - val_accuracy: 0.6400 - val_loss: 162.5853
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5958 - loss: 1.7162 - val_accuracy: 0.5253 - val_loss: 1.6593
 Epoch 44/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6487 - loss: 112.1129 - val_accuracy: 0.6400 - val_loss: 77.8639
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5738 - loss: 2.5632 - val_accuracy: 0.6667 - val_loss: 5.8110
 Epoch 45/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6291 - loss: 42.8160 - val_accuracy: 0.3600 - val_loss: 57.2899
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6260 - loss: 4.1127 - val_accuracy: 0.6667 - val_loss: 3.9686
 Epoch 46/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3721 - loss: 69.1717 - val_accuracy: 0.4800 - val_loss: 7.1171
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6448 - loss: 3.8399 - val_accuracy: 0.3434 - val_loss: 4.5591
 Epoch 47/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5959 - loss: 12.3284 - val_accuracy: 0.6400 - val_loss: 53.6568
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5084 - loss: 4.2558 - val_accuracy: 0.3434 - val_loss: 7.0784
 Epoch 48/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.7008 - loss: 30.7733 - val_accuracy: 0.6800 - val_loss: 10.4793
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5441 - loss: 7.5516 - val_accuracy: 0.6667 - val_loss: 16.0417
 Epoch 49/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5802 - loss: 32.4824 - val_accuracy: 0.3600 - val_loss: 46.4382
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6425 - loss: 13.1984 - val_accuracy: 0.6364 - val_loss: 1.4150
 Epoch 50/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4977 - loss: 34.5550 - val_accuracy: 0.6400 - val_loss: 54.6070
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5220 - loss: 7.9788 - val_accuracy: 0.3333 - val_loss: 37.2936
 Epoch 51/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6831 - loss: 43.7355 - val_accuracy: 0.6400 - val_loss: 69.1301
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4238 - loss: 26.7746 - val_accuracy: 0.3333 - val_loss: 16.3578
 Epoch 52/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6581 - loss: 44.4245 - val_accuracy: 0.6400 - val_loss: 8.6961
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4907 - loss: 12.6212 - val_accuracy: 0.3333 - val_loss: 14.2129
 Epoch 53/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.5303 - loss: 16.9109 - val_accuracy: 0.4800 - val_loss: 6.9051
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5891 - loss: 8.4141 - val_accuracy: 0.3939 - val_loss: 2.6956
 Epoch 54/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6953 - loss: 9.7746 - val_accuracy: 0.6400 - val_loss: 52.9581
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5760 - loss: 1.8491 - val_accuracy: 0.6667 - val_loss: 5.2804
 Epoch 55/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6081 - loss: 41.1198 - val_accuracy: 0.6800 - val_loss: 16.6141
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6627 - loss: 7.4416 - val_accuracy: 0.6667 - val_loss: 3.1316
 Epoch 56/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4653 - loss: 12.6590 - val_accuracy: 0.3600 - val_loss: 15.5821
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4857 - loss: 5.0629 - val_accuracy: 0.4343 - val_loss: 2.1286
 Epoch 57/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4437 - loss: 18.7781 - val_accuracy: 0.6400 - val_loss: 25.4163
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5270 - loss: 2.9301 - val_accuracy: 0.4141 - val_loss: 2.1941
 Epoch 58/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6459 - loss: 12.0518 - val_accuracy: 0.3600 - val_loss: 18.3088
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5862 - loss: 9.7073 - val_accuracy: 0.6667 - val_loss: 12.1882
 Epoch 59/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4220 - loss: 21.1886 - val_accuracy: 0.6400 - val_loss: 24.1997
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6668 - loss: 11.7407 - val_accuracy: 0.6667 - val_loss: 10.9309
 Epoch 60/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5734 - loss: 13.7745 - val_accuracy: 0.6400 - val_loss: 62.1522
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5809 - loss: 5.9104 - val_accuracy: 0.6667 - val_loss: 5.4578
 Epoch 61/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6768 - loss: 72.9597 - val_accuracy: 0.6400 - val_loss: 217.8488
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 6ms/step - accuracy: 0.6115 - loss: 5.8305 - val_accuracy: 0.6667 - val_loss: 7.6186
 Epoch 62/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6393 - loss: 173.9278 - val_accuracy: 0.6400 - val_loss: 249.2299
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6044 - loss: 7.8199 - val_accuracy: 0.6667 - val_loss: 2.3407
 Epoch 63/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6758 - loss: 179.5259 - val_accuracy: 0.6400 - val_loss: 196.0006
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4687 - loss: 10.7738 - val_accuracy: 0.6162 - val_loss: 1.2251
 Epoch 64/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6373 - loss: 142.9431 - val_accuracy: 0.6400 - val_loss: 97.9429
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5386 - loss: 14.3648 - val_accuracy: 0.6667 - val_loss: 4.5393
 Epoch 65/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6362 - loss: 58.3077 - val_accuracy: 0.3600 - val_loss: 21.1403
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5357 - loss: 12.6687 - val_accuracy: 0.3434 - val_loss: 8.4348
 Epoch 66/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.3471 - loss: 47.3285 - val_accuracy: 0.3600 - val_loss: 49.4839
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4895 - loss: 10.4488 - val_accuracy: 0.3434 - val_loss: 6.9001
 Epoch 67/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3883 - loss: 31.9780 - val_accuracy: 0.6400 - val_loss: 37.6405
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5763 - loss: 3.8645 - val_accuracy: 0.6667 - val_loss: 4.3535
 Epoch 68/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6341 - loss: 30.3804 - val_accuracy: 0.6400 - val_loss: 43.8953
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5843 - loss: 4.9992 - val_accuracy: 0.3333 - val_loss: 3.7857
 Epoch 69/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6643 - loss: 26.5868 - val_accuracy: 0.4800 - val_loss: 7.3514
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5538 - loss: 6.0737 - val_accuracy: 0.6667 - val_loss: 4.3770
 Epoch 70/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5099 - loss: 14.4995 - val_accuracy: 0.3600 - val_loss: 10.3971
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5751 - loss: 4.9741 - val_accuracy: 0.6364 - val_loss: 1.4564
 Epoch 71/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4417 - loss: 10.3357 - val_accuracy: 0.6400 - val_loss: 26.9642
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5705 - loss: 2.3066 - val_accuracy: 0.4848 - val_loss: 1.9054
 Epoch 72/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6561 - loss: 14.8698 - val_accuracy: 0.5200 - val_loss: 7.7908
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5798 - loss: 4.2359 - val_accuracy: 0.6667 - val_loss: 1.4369
 Epoch 73/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4694 - loss: 7.9368 - val_accuracy: 0.6800 - val_loss: 16.0751
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6657 - loss: 2.6481 - val_accuracy: 0.3333 - val_loss: 20.9475
 Epoch 74/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6394 - loss: 10.4436 - val_accuracy: 0.5200 - val_loss: 7.8412
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4670 - loss: 10.3735 - val_accuracy: 0.6667 - val_loss: 6.3709
 Epoch 75/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.4908 - loss: 4.6867 - val_accuracy: 0.3600 - val_loss: 6.8942
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5908 - loss: 8.0890 - val_accuracy: 0.6667 - val_loss: 2.7024
 Epoch 76/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.5131 - loss: 4.7735 - val_accuracy: 0.6800 - val_loss: 10.8589
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5953 - loss: 2.6197 - val_accuracy: 0.6667 - val_loss: 5.8562
 Epoch 77/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6181 - loss: 5.4314 - val_accuracy: 0.6800 - val_loss: 15.6753
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6286 - loss: 4.3452 - val_accuracy: 0.6364 - val_loss: 1.1334
 Epoch 78/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6613 - loss: 12.0182 - val_accuracy: 0.6800 - val_loss: 15.8348
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6203 - loss: 1.4938 - val_accuracy: 0.5051 - val_loss: 1.6975
 Epoch 79/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6172 - loss: 6.9283 - val_accuracy: 0.3600 - val_loss: 8.3732
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6872 - loss: 1.0634 - val_accuracy: 0.6667 - val_loss: 1.9793
 Epoch 80/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5627 - loss: 6.2230 - val_accuracy: 0.6400 - val_loss: 25.3491
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6183 - loss: 4.3064 - val_accuracy: 0.3333 - val_loss: 5.1527
 Epoch 81/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6560 - loss: 15.2657 - val_accuracy: 0.4000 - val_loss: 6.5883
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5246 - loss: 6.9436 - val_accuracy: 0.6667 - val_loss: 7.5333
 Epoch 82/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5496 - loss: 4.1680 - val_accuracy: 0.3600 - val_loss: 8.9747
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5509 - loss: 5.5989 - val_accuracy: 0.6667 - val_loss: 2.1498
 Epoch 83/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4448 - loss: 7.3670 - val_accuracy: 0.6800 - val_loss: 13.3440
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5631 - loss: 3.6566 - val_accuracy: 0.6162 - val_loss: 1.1721
 Epoch 84/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5981 - loss: 5.8806 - val_accuracy: 0.3600 - val_loss: 11.6454
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6269 - loss: 1.8466 - val_accuracy: 0.6667 - val_loss: 3.9286
 Epoch 85/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3686 - loss: 13.5325 - val_accuracy: 0.6800 - val_loss: 15.5139
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5657 - loss: 5.4535 - val_accuracy: 0.6667 - val_loss: 11.7435
 Epoch 86/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5272 - loss: 9.1142 - val_accuracy: 0.6800 - val_loss: 8.7325
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6659 - loss: 8.4535 - val_accuracy: 0.6162 - val_loss: 1.1767
 Epoch 87/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.6550 - loss: 6.5467 - val_accuracy: 0.4000 - val_loss: 6.1632
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6339 - loss: 2.2822 - val_accuracy: 0.6667 - val_loss: 10.3461
 Epoch 88/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4378 - loss: 4.2680 - val_accuracy: 0.6800 - val_loss: 12.8487
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6554 - loss: 8.4954 - val_accuracy: 0.6667 - val_loss: 4.4124
 Epoch 89/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - accuracy: 0.6393 - loss: 7.7373 - val_accuracy: 0.3600 - val_loss: 11.1603
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6512 - loss: 2.2147 - val_accuracy: 0.3333 - val_loss: 6.3569
 Epoch 90/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3449 - loss: 19.2652 - val_accuracy: 0.4000 - val_loss: 5.9291
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4289 - loss: 7.5030 - val_accuracy: 0.6667 - val_loss: 4.0156
 Epoch 91/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.4998 - loss: 7.5575 - val_accuracy: 0.4000 - val_loss: 5.8403
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6105 - loss: 5.1511 - val_accuracy: 0.6667 - val_loss: 7.5607
 Epoch 92/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.3139 - loss: 9.7641 - val_accuracy: 0.6800 - val_loss: 12.8780
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6716 - loss: 12.2905 - val_accuracy: 0.6667 - val_loss: 6.5184
 Epoch 93/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6665 - loss: 7.0197 - val_accuracy: 0.6000 - val_loss: 6.9502
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5865 - loss: 6.3597 - val_accuracy: 0.6667 - val_loss: 2.3016
 Epoch 94/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.6190 - loss: 3.4661 - val_accuracy: 0.6800 - val_loss: 9.7559
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.7033 - loss: 5.6845 - val_accuracy: 0.3333 - val_loss: 14.5310
 Epoch 95/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 31ms/step - accuracy: 0.6354 - loss: 4.4283 - val_accuracy: 0.3200 - val_loss: 5.6791
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4671 - loss: 14.1650 - val_accuracy: 0.3333 - val_loss: 13.5016
 Epoch 96/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.4718 - loss: 3.8436 - val_accuracy: 0.6000 - val_loss: 6.6140
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4011 - loss: 10.8928 - val_accuracy: 0.6667 - val_loss: 7.0261
 Epoch 97/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5026 - loss: 4.7151 - val_accuracy: 0.6800 - val_loss: 12.1752
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6410 - loss: 3.3827 - val_accuracy: 0.3333 - val_loss: 11.5744
 Epoch 98/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5733 - loss: 6.7372 - val_accuracy: 0.5600 - val_loss: 6.0589
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.4144 - loss: 11.5106 - val_accuracy: 0.5253 - val_loss: 1.7198
 Epoch 99/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5906 - loss: 4.9796 - val_accuracy: 0.6000 - val_loss: 6.2254
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.5599 - loss: 4.0800 - val_accuracy: 0.6667 - val_loss: 3.2040
 Epoch 100/100
-4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.5541 - loss: 3.8409 - val_accuracy: 0.6800 - val_loss: 9.9745
-1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 46ms/step
+13/13 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.6377 - loss: 2.8989 - val_accuracy: 0.6667 - val_loss: 6.1487
+4/4 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step
 
-Accuracy Score for Predictions (Model 2): 0.68
+Accuracy Score for Predictions (Model 2): 0.6666666666666666
 
 #Insight Gained:
-    - The model produced an accuracy of 68%.
+    - The model produced an accuracy of 66.66%.
     - It can be inferred that feature engineering had no improvement on the model
 """
 
@@ -274,9 +276,6 @@ predictions_df_model2 = pd.DataFrame(test_predictions_model2, columns=['Predicti
 predictions_df_model2.index.names = ['Index']
 predictions_df_model2.to_csv('Artifacts/NN_Model2_Predictions.csv', mode='a', header=True)
 
-# Save Model 2 as a pickle file
-with open('Artifacts/Model_2.pkl', 'wb') as f:
-    pickle.dump(model2, f)
 
 # Create dummy feature importance values
 feature_importance_train = pd.DataFrame({'Feature': X_train.columns, 'Importance': np.random.rand(X_train.shape[1])})
@@ -317,9 +316,30 @@ accuracy_score 0.7142857142857143
 5 of kfold 5
 accuracy_score 0.6836734693877551
 
-Mean validation accuracy score: 0.7045969903112761
+
+Insight Gained:
+    -
 """
 
+# Hyperparameters the DecisionTreeClassifier
+param_grid = {'max_depth': np.arange(3, 10)}
+
+# Use GridSearchCV to find the best parameters
+grid_tree = GridSearchCV(DecisionTreeClassifier(), param_grid, cv=5, scoring='accuracy')
+grid_tree.fit(X_train, y_train)
+
+# Best parameters for DecisionTreeClassifier
+print(f"Best parameters for DecisionTreeClassifier: {grid_tree.best_params_}")
+print(f"Best score for DecisionTreeClassifier: {grid_tree.best_score_}")
+
+"""
+Answers:
+    Best parameters for DecisionTreeClassifier: {'max_depth': 3}
+    Best score for DecisionTreeClassifier: 0.8217137293086662
+
+Insight Gained:
+    -
+"""
 
 # Preprocess the test data in the same way as the training data
 New_Features_test_copy_processed = pd.get_dummies(New_Features_test_copy.drop('Loan_Status', axis=1))
@@ -341,43 +361,124 @@ print(f"\nMean validation accuracy score: {mean_score}")
     - The accuracy of the model using the Decision Tree algorithm results in a 70.46% accuracy.
 """
 
-#Hyperparameter Tuning
-# Define parameter values to be searched
-sample_split_range = list(range(1, 50))
 
-# Create parameter grid
-param_grid = dict(min_samples_split=sample_split_range)
-grid = GridSearchCV(tree.DecisionTreeClassifier(random_state=1), param_grid, cv=10, scoring='accuracy')
-
-# Fit the grid with data
-grid.fit(X, y)
-grid.cv_results_
-
-# Examine the best model
-print(f"Best Score: {grid.best_score_}\n")
-print(f"Best Parameter: {grid.best_params_}\n")
-print(f"Best Estimator: {grid.best_estimator_}")
+# RandomForestClassifier Model
+i=1
+scores = [] 
+kf=StratifiedKFold(n_splits=5,random_state=1,shuffle=True) 
+for train_index,test_index in kf.split(X,y):
+    print('\n{} of kfold {}'.format(i,kf.n_splits))
+    xtr,xvl=X.loc[train_index],X.loc[test_index] 
+    ytr,yvl=y[train_index],y[test_index]
+    model=RandomForestClassifier(random_state=1,max_depth=10)
+    model.fit(xtr,ytr)
+    pred_test=model.predict(xvl)
+    score=accuracy_score(yvl,pred_test)
+    scores.append(score)
+    print('accuracy_score',score)
+    i+=1
 
 """
 Answers:
-    Best Score: 0.7881632653061225
-    Best Parameter: {'min_samples_split': 49}
-    Best Estimator: DecisionTreeClassifier(min_samples_split=49, random_state=1)
+1 of kfold 5
+accuracy_score 0.8484848484848485
+2 of kfold 5
+accuracy_score 0.7448979591836735
+3 of kfold 5
+accuracy_score 0.8061224489795918
+4 of kfold 5
+accuracy_score 0.7653061224489796
+5 of kfold 5
+accuracy_score 0.8367346938775511
 """
 
-# Rebuild the model using the best parameters
-best_min_samples_split = grid.best_params_['min_samples_split']
-model = tree.DecisionTreeClassifier(min_samples_split=best_min_samples_split, random_state=1)
-model.fit(X_train, y_train)
 
-# Make predictions on the processed test data
+# Hyperparameter Tuning for RandomForestClassifier
+# Provide range for max_depth from 1 to 20 with an interval of 2 and from 1 to 200 with an interval of 20 for n_estimators
+paramgrid = {'max_depth': list(range(1, 20, 2)), 'n_estimators': list(range(1, 200, 20))}
+grid_search = GridSearchCV(RandomForestClassifier(random_state=1), paramgrid)
+
+# Fit the grid search model
+grid_search.fit(X_train, y_train)
+
+# Estimating the optimized value
+print(f"Best parameters for RandomForestClassifier: {grid_search.best_estimator_}")
+
+"""
+Answer: Best parameters for RandomForestClassifier: RandomForestClassifier(max_depth=3, n_estimators=61, random_state=1)
+
+Insight Gained:
+    -
+"""
+
+scores = []
+i=1 
+kf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True) 
+for train_index, test_index in kf.split(X, y):
+    print('\n{} of kfold {}'.format(i, kf.n_splits))
+    xtr, xvl = X.loc[train_index], X.loc[test_index] 
+    ytr, yvl = y[train_index], y[test_index]
+    
+    model = grid_search.best_estimator_
+    model.fit(xtr, ytr)
+    pred_test = model.predict(xvl)
+    score = accuracy_score(yvl, pred_test)
+    scores.append(score)
+    print('accuracy_score', score)
+    i += 1
+
+"""
+Answer:
+1 of kfold 5
+accuracy_score 0.8585858585858586
+2 of kfold 5
+accuracy_score 0.7653061224489796
+3 of kfold 5
+accuracy_score 0.826530612244898
+4 of kfold 5
+accuracy_score 0.7653061224489796
+5 of kfold 5
+accuracy_score 0.8469387755102041
+"""
+
+# Preprocess the test data in the same way as the training data
+New_Features_test_copy_processed = pd.get_dummies(New_Features_test_copy.drop('Loan_Status', axis=1))
+
+# Make sure the processed test data has the same columns as the training data
+New_Features_test_copy_processed = New_Features_test_copy_processed.reindex(columns = X.columns, fill_value=0)
+
+# Now you can make predictions on the processed test data
 pred_test=model.predict(New_Features_test_copy_processed)
 
 # Calculate the mean validation accuracy score
 mean_score = np.mean(scores)
 print(f"\nMean validation accuracy score: {mean_score}")
 
-""" Answer: Mean validation accuracy score: 0.7045969903112761 """
+""" 
+Answer: Mean validation accuracy score: 0.812533498247784 
+
+Insight Gained:
+    -
+"""
+
+
+raw_data = pd.read_csv('Data/Original Data/raw_data.csv')
+submission = pd.DataFrame()
+
+# Fill 'Loan_Status' with predictions
+submission['Loan_Status'] = pred_test 
+
+# Fill 'Loan_ID' with test Loan_ID
+# Please replace 'raw_data' with the actual DataFrame containing the Loan_IDs
+submission['Loan_ID'] = raw_data['Loan_ID'] 
+
+# Replace 0 and 1 with 'N' and 'Y'
+submission['Loan_Status'].replace(0, 'N', inplace=True)
+submission['Loan_Status'].replace(1, 'Y', inplace=True)
+
+# Convert the submission DataFrame to a .csv format
+submission.to_csv('Data/Random_Forest.csv', index=False)
+
 
 # Convert the importances into a pandas DataFrame
 importances = model.feature_importances_
@@ -395,6 +496,11 @@ plt.show()
 
 """
 # Insight Gained:
-    - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential factor in the model’s predictions.
-    - 'Loan_AMount_Log' is the next important feature followed by the features ‘EMI’, ‘Income_After_EMI’,and  ‘Total_Income_Log’.
+    - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential predictor in the model’s predictions.
+    - Following ‘Credit_History’, features like ‘Income_log’, ‘Loan_Amount_Log’, and ‘Balance_Income’ are also important, but to a lesser extent.
+    - ‘Credit_History’ is overly dominant, so the model may be biased towards this feature, potentially overlooking other important factors.
 """
+
+# Save Model 2 as a pickle file
+with open('Artifacts/Model_2.pkl', 'wb') as f:
+    pickle.dump(model, f)
