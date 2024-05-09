@@ -7,6 +7,7 @@ import pickle
 
 # Initialise the Dash App
 app = dash.Dash(__name__)
+server = app.server
 
 # Load the model
 with open('Artifacts/Model_2.pkl', 'rb') as f:
