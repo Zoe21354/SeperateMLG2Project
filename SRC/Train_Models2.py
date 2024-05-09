@@ -306,15 +306,15 @@ for train_index,test_index in kf.split(X,y):
 """
 Answers:
     1 of kfold 5
-    accuracy_score 0.7474747474747475
+    accuracy_score 0.7777777777777778
     2 of kfold 5
-    accuracy_score 0.6938775510204082
+    accuracy_score 0.7040816326530612
     3 of kfold 5
-    accuracy_score 0.6836734693877551
+    accuracy_score 0.673469387755102
     4 of kfold 5
-    accuracy_score 0.7142857142857143
+    accuracy_score 0.7040816326530612
     5 of kfold 5
-    accuracy_score 0.6836734693877551
+    accuracy_score 0.7142857142857143
 """
 
 # Hyperparameters the DecisionTreeClassifier
@@ -331,7 +331,7 @@ print(f"Best score for DecisionTreeClassifier: {grid_tree.best_score_}")
 """
 Answers:
     Best parameters for DecisionTreeClassifier: {'max_depth': 3}
-    Best score for DecisionTreeClassifier: 0.8217137293086662
+    Best score for DecisionTreeClassifier: 0.8140214216163584
 """
 
 # Preprocess the test data in the same way as the training data
@@ -348,10 +348,10 @@ mean_score = np.mean(scores)
 print(f"\nMean validation accuracy score: {mean_score}")
 
 """
-#Answer: Mean validation accuracy score: 0.7045969903112761
+#Answer: Mean validation accuracy score: 0.7147392290249434
 
 Insight Gained:
-    - The Decision Tree model's accuracy scores for the five folds were approximately 0.75, 0.69, 0.68, 0.71, and 0.68 with a mean accuracy score of 70.45%, suggesting the model’s performance varied across different subsets of the data.
+    - The Decision Tree model's accuracy scores for the five folds were approximately 0.75, 0.69, 0.68, 0.71, and 0.68 with a mean accuracy score of 71.47%, suggesting the model’s performance varied across different subsets of the data.
     - After performing hyperparameter tuning on the Decision Tree model, the best max_depth parameter was found to be 3. This means by limiting the tree depth to 3 levels resulted in the best performance on the training data according to the accuracy score of 82.17%.
     - This score is higher than the accuracy scores obtained before tuning, suggesting that the hyperparameter tuning improved the model’s performance.
 """
@@ -378,19 +378,19 @@ mean_score = np.mean(scores)
 print(f"\nMean validation accuracy score: {mean_score}")
 
 """
-    Answers:
+Answers:
     1 of kfold 5
     accuracy_score 0.8484848484848485
     2 of kfold 5
     accuracy_score 0.7448979591836735
     3 of kfold 5
-    accuracy_score 0.8061224489795918
+    accuracy_score 0.8163265306122449
     4 of kfold 5
-    accuracy_score 0.7653061224489796
+    accuracy_score 0.7755102040816326
     5 of kfold 5
-    accuracy_score 0.8367346938775511
+    accuracy_score 0.826530612244898
 
-    Mean validation accuracy score: 0.8003092145949289
+    Mean validation accuracy score: 0.8023500309214595
 """
 
 
@@ -405,7 +405,7 @@ grid_search.fit(X_train, y_train)
 # Estimating the optimized value
 print(f"Best parameters for RandomForestClassifier: {grid_search.best_estimator_}")
 
-""" Answer: Best parameters for RandomForestClassifier: RandomForestClassifier(max_depth=3, n_estimators=61, random_state=1) """
+""" Answer: Best parameters for RandomForestClassifier: RandomForestClassifier(max_depth=5, n_estimators=101, random_state=1) """
 
 scores = []
 i=1 
@@ -428,18 +428,18 @@ mean_score = np.mean(scores)
 print(f"\nMean validation accuracy score: {mean_score}")
 """
 Answer:
-1 of kfold 5
-accuracy_score 0.8585858585858586
-2 of kfold 5
-accuracy_score 0.7653061224489796
-3 of kfold 5
-accuracy_score 0.826530612244898
-4 of kfold 5
-accuracy_score 0.7653061224489796
-5 of kfold 5
-accuracy_score 0.8469387755102041
+    1 of kfold 5
+    accuracy_score 0.8585858585858586
+    2 of kfold 5
+    accuracy_score 0.7857142857142857
+    3 of kfold 5
+    accuracy_score 0.7959183673469388
+    4 of kfold 5
+    accuracy_score 0.7755102040816326
+    5 of kfold 5
+    accuracy_score 0.826530612244898
 
-Mean validation accuracy score: 0.812533498247784 
+    Mean validation accuracy score: 0.8084518655947226
 """
 
 
@@ -454,7 +454,7 @@ pred_test=model.predict(New_Features_test_copy_processed)
 
 """ 
 Insight Gained:
-    - The Random Forest model's accuracy scores for the five folds were approximately 0.85, 0.74, 0.81, 0.77, and 0.84 with a mean score of 80.03%. This suggests that the model’s performance also varied across different subsets of the data.
+    - The Random Forest model's accuracy scores for the five folds were approximately 0.85, 0.74, 0.81, 0.77, and 0.84 with a mean score of 80.84%. This suggests that the model’s performance also varied across different subsets of the data.
     - After performing hyperparameter tuning on the Random Forest model, the best max_depth parameter was found to be 3 and the best n_estimators was 61, meaning the limit of the tree depth was to 3 levels and used 61 trees in the forest. This resulted in the best performance on the training data with an increase in the accuracy score at 81.25%.
 """
 

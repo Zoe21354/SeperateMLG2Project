@@ -29,6 +29,9 @@ warnings.filterwarnings('ignore')
 cleaned_raw_data = pd.read_csv('Data/Cleaned Data/cleaned_raw_data.csv')
 cleaned_raw_data_copy = cleaned_raw_data.copy()
 
+# Convert the 'Dependents' column to 'object'
+cleaned_raw_data['Dependents'] = cleaned_raw_data['Dependents'].astype('object')
+
 # Define the independent variables (features) and the target variable
 X = cleaned_raw_data_copy.drop('Loan_Status', axis=1)  # all columns except 'Loan_Status'
 y = cleaned_raw_data_copy['Loan_Status']  # only 'Loan_Status' column
@@ -41,9 +44,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 """ # Create new DataFrames for training and testing sets
 train_data = pd.concat([X_train, y_train], axis=1)
-test_data = pd.concat([X_test, y_test], axis=1) """
+test_data = pd.concat([X_test, y_test], axis=1)
 
-""" # Save the training and testing sets to CSV files
+# Save the training and testing sets to CSV files
 train_data.to_csv('Data/Split Data/train_data.csv', index=False)
 test_data.to_csv('Data/Split Data/test_data.csv', index=False) """
 
@@ -110,16 +113,12 @@ print(f"\nMean validation accuracy score: {mean_score}")
 # Answers:
     1 of kfold 5
     accuracy_score: 0.7723577235772358
-
     2 of kfold 5
     accuracy_score: 0.7967479674796748
-
     3 of kfold 5
     accuracy_score: 0.7642276422764228
-
     4 of kfold 5
     accuracy_score: 0.8048780487804879
-
     5 of kfold 5
     accuracy_score: 0.7786885245901639
 
@@ -137,12 +136,9 @@ cross_val_predictions_df = pd.DataFrame(pred_test, columns=['Cross Validation Pr
 cross_val_predictions_df.index.names = ['Index']
 cross_val_predictions_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mode='a', header=True)
 
-
 # Save the mean validation accuracy score to the same CSV file
 mean_score_df = pd.DataFrame([mean_score], columns=['Mean Validation Accuracy Score'])
 mean_score_df.to_csv('Artifacts/Log_Reg_Mod1_Cross_Validate_Predictions.csv', mode='a', header=False)
-
-
 
 # Save the trained model to a pickle file
 with open('Artifacts/Model_1.pkl', 'wb') as f:

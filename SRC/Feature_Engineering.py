@@ -10,6 +10,9 @@ warnings.filterwarnings('ignore')
 train_data= pd.read_csv('Data/Split Data/train_data.csv')
 test_data=pd.read_csv('Data/Split Data/test_data.csv')
 
+# Convert the 'Dependents' column to 'object'
+train_data['Dependents'] = train_data['Dependents'].astype('object')
+test_data['Dependents'] = test_data['Dependents'].astype('object')
 
 # =============================================== FEATURE ENGINEERING MODEL 1 =============================================== #
 """     
@@ -92,59 +95,20 @@ Testing Data  Columns:Index(['Dependents', 'Credit_History', 'Loan_Amount_Log', 
     'Property_Area_Semiurban', 'Property_Area_Urban','Loan_Status', 'Total_Income', 'Total_Income_Log', 'EMI', 'Income_After_EMI'], dtype='object')
 """
 
-# Store new Features in CSV files
-train_data.to_csv('Artifacts/Feature_Importance_train_data_NF_Model1.csv', index=False)
-test_data.to_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv', index=False)
+# Convert categorical variable in the X dataset into dummy variables
+# Define the independent variables (features) and the target variable
+X = train_data.drop('Loan_Status', axis=1)  
+y = train_data['Loan_Status']
+X = pd.get_dummies(X)
+X['Loan_Status'] = y
+print(f"Feature_Importance_train_data_NF_Model1 Columns: {X.columns}\n")
 
-
-# =============================================== FEATURE ENGINEERING MODEL 2 =============================================== #
-# Feature 1: Total Income
-train_data['Total_Income'] = train_data['Applicant_Income'] + train_data['Coapplicant_Income']
-test_data['Total_Income'] = test_data['Applicant_Income'] + test_data['Coapplicant_Income']
-
-# Distribution normalization
-sns.distplot(train_data['Total_Income'])
-plt.title('Distribution of Total Income')
-plt.xlabel('Total Income')
-plt.ylabel('Density')
-plt.show()
-
-train_data['Total_Income_Log'] = np.log(train_data['Total_Income'])
-test_data['Total_Income_Log'] = np.log(test_data['Total_Income'])
-
-sns.distplot(train_data['Total_Income_Log'])
-plt.title('Distribution of Total Income Log')
-plt.xlabel('Total Income Log')
-plt.ylabel('Density')
-plt.show()
-
-# Feature 2: Equated Monthly Installment (EMI)
-train_data['EMI'] = train_data['Loan_Amount'] / train_data['Loan_Amount_Term']
-test_data['EMI'] = test_data['Loan_Amount'] / test_data['Loan_Amount_Term']
-
-sns.distplot(train_data['EMI'])
-plt.title('Distribution of Equated Monthly Installments')
-plt.xlabel('Equated Monthly Installment')
-plt.ylabel('Density')
-plt.show()
-
-# Feature 3: Income_After_EMI
-train_data['Income_After_EMI'] = train_data['Total_Income'] - (train_data['EMI'] * 1000)
-test_data['Income_After_EMI'] = test_data['Total_Income'] - (test_data['EMI'] * 1000)
-
-sns.distplot(train_data['Income_After_EMI'])
-plt.title('Distribution of Income After EMI')
-plt.xlabel('Income After EMI')
-plt.ylabel('Density')
-plt.show()
-
-# Remove all features that created the new features
-train_data = train_data.drop(['Applicant_Income', 'Coapplicant_Income', 'Loan_Amount', 'Loan_Amount_Term'], axis=1)
-test_data = test_data.drop(['Applicant_Income', 'Coapplicant_Income', 'Loan_Amount', 'Loan_Amount_Term'], axis=1)
-
-print(f"Training Data Columns: {train_data.columns}\n")
-print(f"Testing Data Columns: {test_data.columns}\n")
+X_test = test_data.drop('Loan_Status', axis=1)  
+y_test = test_data['Loan_Status']
+X_test = pd.get_dummies(X_test)
+X_test['Loan_Status'] = y_test
+print(f"Feature_Importance_test_data_NF_Model1 Columns: {X_test.columns}\n")
 
 # Store new Features in CSV files
-train_data.to_csv('Artifacts/Feature_Importance_train_data_NF_Model2.csv', index=False)
-test_data.to_csv('Artifacts/Feature_Importance_test_data_NF_Model2.csv', index=False)
+X.to_csv('Artifacts/Feature_Importance_train_data_NF_Model1.csv', index=False)
+X_test.to_csv('Artifacts/Feature_Importance_test_data_NF_Model1.csv', index=False)

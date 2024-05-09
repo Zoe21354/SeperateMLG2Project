@@ -33,7 +33,7 @@ Validation_data_copy['Income_After_EMI']=Validation_data_copy['Total_Income']-(V
 # Remove all features that created the new features
 Validation_data_copy=Validation_data_copy.drop(['Applicant_Income','Coapplicant_Income','Loan_Amount','Loan_Amount_Term'],axis=1)
 
-print(f"Training Data Columns: {Validation_data_copy.columns}\n")
+print(f"Validation Data Columns: {Validation_data_copy.columns}\n")
 
 # Store new Features in CSV files
 Validation_data_copy.to_csv('Artifacts/Feature_Importance_validation_data.csv', index=False)
