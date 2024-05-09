@@ -305,20 +305,16 @@ for train_index,test_index in kf.split(X,y):
 
 """
 Answers:
-1 of kfold 5
-accuracy_score 0.7474747474747475
-2 of kfold 5
-accuracy_score 0.6938775510204082
-3 of kfold 5
-accuracy_score 0.6836734693877551
-4 of kfold 5
-accuracy_score 0.7142857142857143
-5 of kfold 5
-accuracy_score 0.6836734693877551
-
-
-Insight Gained:
-    -
+    1 of kfold 5
+    accuracy_score 0.7474747474747475
+    2 of kfold 5
+    accuracy_score 0.6938775510204082
+    3 of kfold 5
+    accuracy_score 0.6836734693877551
+    4 of kfold 5
+    accuracy_score 0.7142857142857143
+    5 of kfold 5
+    accuracy_score 0.6836734693877551
 """
 
 # Hyperparameters the DecisionTreeClassifier
@@ -336,9 +332,6 @@ print(f"Best score for DecisionTreeClassifier: {grid_tree.best_score_}")
 Answers:
     Best parameters for DecisionTreeClassifier: {'max_depth': 3}
     Best score for DecisionTreeClassifier: 0.8217137293086662
-
-Insight Gained:
-    -
 """
 
 # Preprocess the test data in the same way as the training data
@@ -357,8 +350,10 @@ print(f"\nMean validation accuracy score: {mean_score}")
 """
 #Answer: Mean validation accuracy score: 0.7045969903112761
 
-# Insight Gained:
-    - The accuracy of the model using the Decision Tree algorithm results in a 70.46% accuracy.
+Insight Gained:
+    - The Decision Tree model's accuracy scores for the five folds were approximately 0.75, 0.69, 0.68, 0.71, and 0.68 with a mean accuracy score of 70.45%, suggesting the model’s performance varied across different subsets of the data.
+    - After performing hyperparameter tuning on the Decision Tree model, the best max_depth parameter was found to be 3. This means by limiting the tree depth to 3 levels resulted in the best performance on the training data according to the accuracy score of 82.17%.
+    - This score is higher than the accuracy scores obtained before tuning, suggesting that the hyperparameter tuning improved the model’s performance.
 """
 
 
@@ -378,18 +373,24 @@ for train_index,test_index in kf.split(X,y):
     print('accuracy_score',score)
     i+=1
 
+# Calculate the mean validation accuracy score
+mean_score = np.mean(scores)
+print(f"\nMean validation accuracy score: {mean_score}")
+
 """
-Answers:
-1 of kfold 5
-accuracy_score 0.8484848484848485
-2 of kfold 5
-accuracy_score 0.7448979591836735
-3 of kfold 5
-accuracy_score 0.8061224489795918
-4 of kfold 5
-accuracy_score 0.7653061224489796
-5 of kfold 5
-accuracy_score 0.8367346938775511
+    Answers:
+    1 of kfold 5
+    accuracy_score 0.8484848484848485
+    2 of kfold 5
+    accuracy_score 0.7448979591836735
+    3 of kfold 5
+    accuracy_score 0.8061224489795918
+    4 of kfold 5
+    accuracy_score 0.7653061224489796
+    5 of kfold 5
+    accuracy_score 0.8367346938775511
+
+    Mean validation accuracy score: 0.8003092145949289
 """
 
 
@@ -404,12 +405,7 @@ grid_search.fit(X_train, y_train)
 # Estimating the optimized value
 print(f"Best parameters for RandomForestClassifier: {grid_search.best_estimator_}")
 
-"""
-Answer: Best parameters for RandomForestClassifier: RandomForestClassifier(max_depth=3, n_estimators=61, random_state=1)
-
-Insight Gained:
-    -
-"""
+""" Answer: Best parameters for RandomForestClassifier: RandomForestClassifier(max_depth=3, n_estimators=61, random_state=1) """
 
 scores = []
 i=1 
@@ -427,6 +423,9 @@ for train_index, test_index in kf.split(X, y):
     print('accuracy_score', score)
     i += 1
 
+# Calculate the mean validation accuracy score
+mean_score = np.mean(scores)
+print(f"\nMean validation accuracy score: {mean_score}")
 """
 Answer:
 1 of kfold 5
@@ -439,7 +438,10 @@ accuracy_score 0.826530612244898
 accuracy_score 0.7653061224489796
 5 of kfold 5
 accuracy_score 0.8469387755102041
+
+Mean validation accuracy score: 0.812533498247784 
 """
+
 
 # Preprocess the test data in the same way as the training data
 New_Features_test_copy_processed = pd.get_dummies(New_Features_test_copy.drop('Loan_Status', axis=1))
@@ -450,15 +452,10 @@ New_Features_test_copy_processed = New_Features_test_copy_processed.reindex(colu
 # Now you can make predictions on the processed test data
 pred_test=model.predict(New_Features_test_copy_processed)
 
-# Calculate the mean validation accuracy score
-mean_score = np.mean(scores)
-print(f"\nMean validation accuracy score: {mean_score}")
-
 """ 
-Answer: Mean validation accuracy score: 0.812533498247784 
-
 Insight Gained:
-    -
+    - The Random Forest model's accuracy scores for the five folds were approximately 0.85, 0.74, 0.81, 0.77, and 0.84 with a mean score of 80.03%. This suggests that the model’s performance also varied across different subsets of the data.
+    - After performing hyperparameter tuning on the Random Forest model, the best max_depth parameter was found to be 3 and the best n_estimators was 61, meaning the limit of the tree depth was to 3 levels and used 61 trees in the forest. This resulted in the best performance on the training data with an increase in the accuracy score at 81.25%.
 """
 
 
