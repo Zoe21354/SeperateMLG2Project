@@ -398,3 +398,9 @@ plt.show()
     - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential factor in the model’s predictions.
     - 'Loan_AMount_Log' is the next important feature followed by the features ‘EMI’, ‘Income_After_EMI’,and  ‘Total_Income_Log’.
 """
+
+# ================================================== C. SAVE MODEL 2 ================================================== #
+from tensor_flow import save_model
+
+# Save Model 2 to an h5 file
+save_model(model2, 'Model2.h5')
