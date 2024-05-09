@@ -55,8 +55,8 @@ plt.ylabel('Density')
 plt.show()
 
 
-# Feature 3: Balanced Income
-    # The feature "Balanced Income" is created by dividing the ‘LoanAmount’ by the ‘Loan_Amount_Term’. 
+# Feature 3: Income_After_EMI
+    # The feature "Income_After_EMI" is created by dividing the ‘LoanAmount’ by the ‘Loan_Amount_Term’. 
     # This is to get the monthly payment amount for a loan, given the total loan amount and the term of the loan. 
     # This will give an indication of the individuals monthly financial obligation towards the loan.
     # 'EMI' is multiplied with 1000 to make the unit equal to 'Total_Income'.
@@ -128,7 +128,7 @@ plt.xlabel('Equated Monthly Installment')
 plt.ylabel('Density')
 plt.show()
 
-# Feature 3: Balanced Income
+# Feature 3: Income_After_EMI
 train_data['Income_After_EMI'] = train_data['Total_Income'] - (train_data['EMI'] * 1000)
 test_data['Income_After_EMI'] = test_data['Total_Income'] - (test_data['EMI'] * 1000)
 
