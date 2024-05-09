@@ -10,11 +10,12 @@ import pandas as pd
 import numpy as np
 import pickle
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_predict
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_predict, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
+from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 import warnings
 warnings.filterwarnings('ignore')
@@ -303,6 +304,23 @@ for train_index,test_index in kf.split(X,y):
     print('accuracy_score',score)
     i+=1
 
+"""
+Answers:
+1 of kfold 5
+accuracy_score 0.7474747474747475
+2 of kfold 5
+accuracy_score 0.6938775510204082
+3 of kfold 5
+accuracy_score 0.6836734693877551
+4 of kfold 5
+accuracy_score 0.7142857142857143
+5 of kfold 5
+accuracy_score 0.6836734693877551
+
+Mean validation accuracy score: 0.7045969903112761
+"""
+
+
 # Preprocess the test data in the same way as the training data
 New_Features_test_copy_processed = pd.get_dummies(New_Features_test_copy.drop('Loan_Status', axis=1))
 
@@ -317,34 +335,53 @@ mean_score = np.mean(scores)
 print(f"\nMean validation accuracy score: {mean_score}")
 
 """
-#Answer: 
-1 of kfold 5
-accuracy_score 0.7474747474747475
-
-2 of kfold 5
-accuracy_score 0.6938775510204082
-
-3 of kfold 5
-accuracy_score 0.6836734693877551
-
-4 of kfold 5
-accuracy_score 0.7142857142857143
-
-5 of kfold 5
-accuracy_score 0.6836734693877551
-
-Mean validation accuracy score: 0.7045969903112761
-
+#Answer: Mean validation accuracy score: 0.7045969903112761
 
 # Insight Gained:
     - The accuracy of the model using the Decision Tree algorithm results in a 70.46% accuracy.
 """
 
+#Hyperparameter Tuning
+# Define parameter values to be searched
+sample_split_range = list(range(1, 50))
+
+# Create parameter grid
+param_grid = dict(min_samples_split=sample_split_range)
+grid = GridSearchCV(tree.DecisionTreeClassifier(random_state=1), param_grid, cv=10, scoring='accuracy')
+
+# Fit the grid with data
+grid.fit(X, y)
+grid.cv_results_
+
+# Examine the best model
+print(f"Best Score: {grid.best_score_}\n")
+print(f"Best Parameter: {grid.best_params_}\n")
+print(f"Best Estimator: {grid.best_estimator_}")
+
+"""
+Answers:
+    Best Score: 0.7881632653061225
+    Best Parameter: {'min_samples_split': 49}
+    Best Estimator: DecisionTreeClassifier(min_samples_split=49, random_state=1)
+"""
+
+# Rebuild the model using the best parameters
+best_min_samples_split = grid.best_params_['min_samples_split']
+model = tree.DecisionTreeClassifier(min_samples_split=best_min_samples_split, random_state=1)
+model.fit(X_train, y_train)
+
+# Make predictions on the processed test data
+pred_test=model.predict(New_Features_test_copy_processed)
+
+# Calculate the mean validation accuracy score
+mean_score = np.mean(scores)
+print(f"\nMean validation accuracy score: {mean_score}")
+
+""" Answer: Mean validation accuracy score: 0.7045969903112761 """
+
 # Convert the importances into a pandas DataFrame
 importances = model.feature_importances_
 feature_importances = pd.DataFrame({'Feature': X.columns, 'Importance': importances})
-
-# Sort the DataFrame by importance
 feature_importances = feature_importances.sort_values('Importance', ascending=False)
 
 # Plot the feature importances
