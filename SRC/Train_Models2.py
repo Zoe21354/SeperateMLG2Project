@@ -493,17 +493,6 @@ plt.show()
 
 """
 # Insight Gained:
-<<<<<<< HEAD
-    - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential factor in the model’s predictions.
-    - 'Loan_AMount_Log' is the next important feature followed by the features ‘EMI’, ‘Income_After_EMI’,and  ‘Total_Income_Log’.
-"""
-
-# ================================================== C. SAVE MODEL 2 ================================================== #
-from tensor_flow import save_model
-
-# Save Model 2 to an h5 file
-save_model(model2, 'Model2.h5')
-=======
     - The feature ‘Credit_History’ has the highest importance score, indicating it is the most influential predictor in the model’s predictions.
     - Following ‘Credit_History’, features like ‘Income_log’, ‘Loan_Amount_Log’, and ‘Balance_Income’ are also important, but to a lesser extent.
     - ‘Credit_History’ is overly dominant, so the model may be biased towards this feature, potentially overlooking other important factors.
@@ -512,4 +501,3 @@ save_model(model2, 'Model2.h5')
 # Save Model 2 as a pickle file
 with open('Artifacts/Model_2.pkl', 'wb') as f:
     pickle.dump(model, f)
->>>>>>> af2ab3ae0f1b0ad5c0bbc7fd284aa3db4feeb425
